@@ -1,9 +1,23 @@
-version: 0.2
-phases:
-  pre_build:
-    commands:
-      - echo "This is a simple buildspec file"
+version: 0.2 
  
-  build:
-    commands:
-      - echo "I will be running my build commands here"
+env: 
+  variables: 
+    TF_VERSION: "1.1.2"
+ 
+phases: 
+ 
+  install: 
+    commands: 
+      - cd /usr/bin 
+      - "curl -s -qL -o terraform.zip https://releases.hashicorp.com/terraform/${TF_VERSION}/terraform_${TF_VERSION}_linux_amd64.zip" 
+      - unzip -o terraform.zip 
+ 
+  build: 
+    commands: 
+      - terraform init -no-color
+      - terraform plan
+      - terrraform apply --auto-approve
+ 
+  post_build: 
+    commands: 
+      - echo "Resources created"
