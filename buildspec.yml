@@ -20,7 +20,7 @@ phases:
       - ls
       - terraform init -no-color
       - terraform plan
-      - terrraform apply --auto-approve
+      - terraform apply --auto-approve
  
   post_build: 
     commands: 
